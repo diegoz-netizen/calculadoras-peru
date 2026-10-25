@@ -2,7 +2,10 @@ import { SEMESTRES, calcularCTS, proximoDeposito } from './calculos.js';
 
 const form = document.querySelector('#form-cts');
 const salida = document.querySelector('#resultado-cts');
+const compartir = document.querySelector('#compartir');
+const botonCopiar = document.querySelector('#copiar');
 const soles = (n) => n.toLocaleString('es-PE', { style: 'currency', currency: 'PEN' });
+let textoResultado = '';
 
 // Cambia los nombres de los meses y la ayuda de la gratificación según el semestre elegido.
 function mostrarSemestre() {
@@ -56,8 +59,43 @@ form.addEventListener('submit', (e) => {
       </ul>
       ${explicarVariables(r.variables)}
       ${form.regimen.value === 'micro' ? `<p>En una microempresa inscrita en el REMYPE no corresponde CTS. ${notaMicro.textContent} En ese caso, elige «Régimen general» para calcularla.</p>` : ''}`;
+    textoResultado = [
+      `Mi CTS estimada (depósito de ${form.semestre.value}): ${soles(r.total)}`,
+      `- Remuneración computable: ${soles(r.computable)}`,
+      `- Por meses completos: ${soles(r.porMeses)}`,
+      `- Por días: ${soles(r.porDias)}`,
+      `Calculado en ${document.querySelector('link[rel=canonical]').href}`,
+    ].join('\n');
+    compartir.hidden = false;
   } catch (err) {
     salida.innerHTML = `<p class="error">${err.message}</p>`;
+    compartir.hidden = true;
   }
   salida.hidden = false;
+});
+
+// Respaldo para navegadores dentro de apps (Facebook, WhatsApp) que bloquean navigator.clipboard.
+function copiarConTextarea(texto) {
+  const t = document.createElement('textarea');
+  t.value = texto;
+  t.setAttribute('readonly', '');
+  t.style.position = 'fixed';
+  t.style.opacity = '0';
+  document.body.append(t);
+  t.select();
+  const ok = document.execCommand('copy');
+  t.remove();
+  return ok;
+}
+
+botonCopiar.addEventListener('click', async () => {
+  let ok;
+  try {
+    await navigator.clipboard.writeText(textoResultado);
+    ok = true;
+  } catch {
+    ok = copiarConTextarea(textoResultado);
+  }
+  botonCopiar.textContent = ok ? '¡Copiado!' : 'No se pudo copiar';
+  setTimeout(() => { botonCopiar.textContent = 'Copiar resultado'; }, 2000);
 });

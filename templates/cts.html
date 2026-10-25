@@ -57,6 +57,10 @@
   <button type="submit">Calcular CTS</button>
 </form>
 <div id="resultado-cts" class="resultado" hidden aria-live="polite"></div>
+<div id="compartir" class="acciones" hidden>
+  <button type="button" id="copiar" class="secundario">Copiar resultado</button>
+  <a class="boton secundario" href="https://wa.me/?text={{ ('Calcula tu CTS gratis y en segundos: ' ~ site.dominio ~ ruta) | urlencode }}" target="_blank" rel="noopener">Compartir por WhatsApp</a>
+</div>
 
 <h2>¿Cómo se calcula la CTS?</h2>
 <p>Primero se obtiene la <strong>remuneración computable</strong>: sueldo básico + asignación familiar + 1/6 de la gratificación del semestre + promedio de pagos variables regulares.</p>

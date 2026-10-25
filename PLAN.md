@@ -13,7 +13,7 @@ Ejecuta las tareas en orden. Marca cada casilla al terminarla y haz un commit po
 - [x] Pagos variables: en vez de pedir el promedio, mostrar 6 campos (uno por mes del semestre). La lógica calcula si son regulares (al menos 3 meses con pago) y el promedio (suma / 6). Si no son regulares, no se suman y se explica por qué. Tests para ambos casos.
 - [x] Selector de semestre (depósito de mayo o de noviembre) que cambie la ayuda del campo de gratificación (diciembre o julio).
 - [x] Nota en la opción de microempresa: "Si te contrataron antes de que la empresa se inscribiera en el REMYPE, sí te corresponde CTS".
-- [ ] Botón "Copiar resultado" y enlace para compartir por WhatsApp (ayuda a que la gente difunda la página).
+- [x] Botón "Copiar resultado" y enlace para compartir por WhatsApp (ayuda a que la gente difunda la página).
 - [ ] Metaetiquetas Open Graph (título, descripción, imagen) para que el enlace se vea bien en WhatsApp y Facebook.
 - [ ] Añadir `lastmod` al sitemap y `<meta name="robots" content="index,follow">`.
 - [ ] Revisar con Lighthouse (Playwright o Chrome) que Rendimiento y SEO den 95 o más en celular.
