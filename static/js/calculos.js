@@ -78,3 +78,24 @@ export function calcularCTS({ meses, dias = 0, regimen = 'general', ...rc }) {
     total: redondear(porMeses + porDias),
   };
 }
+
+// Semestres de la CTS: depósito hasta el 15 de mayo (nov–abr) y hasta el 15 de noviembre (may–oct).
+export const SEMESTRES = {
+  mayo: {
+    meses: ['Noviembre', 'Diciembre', 'Enero', 'Febrero', 'Marzo', 'Abril'],
+    gratificacion: 'diciembre',
+  },
+  noviembre: {
+    meses: ['Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre'],
+    gratificacion: 'julio',
+  },
+};
+
+/** Próximo depósito de CTS para una fecha: del 16 de mayo al 15 de noviembre toca el de noviembre. */
+export function proximoDeposito(fecha) {
+  const mes = fecha.getMonth() + 1;
+  const dia = fecha.getDate();
+  const despuesDe15Mayo = mes > 5 || (mes === 5 && dia > 15);
+  const hasta15Noviembre = mes < 11 || (mes === 11 && dia <= 15);
+  return despuesDe15Mayo && hasta15Noviembre ? 'noviembre' : 'mayo';
+}

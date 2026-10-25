@@ -8,6 +8,12 @@
 <p>Calcula cuánto te deben depositar de CTS (Compensación por Tiempo de Servicios) en mayo o noviembre, según tu sueldo, tu asignación familiar y el tiempo trabajado en el semestre.</p>
 
 <form id="form-cts" class="calc" data-asignacion="{{ site.asignacion_familiar }}">
+  <label>¿Qué depósito quieres calcular?
+    <select name="semestre">
+      <option value="noviembre">Noviembre (trabajado de mayo a octubre)</option>
+      <option value="mayo">Mayo (trabajado de noviembre a abril)</option>
+    </select>
+  </label>
   <label>Sueldo básico mensual (S/)
     <input name="sueldo" type="number" min="0" step="0.01" required>
   </label>
@@ -19,7 +25,7 @@
   </label>
   <label>Gratificación recibida en el semestre (S/)
     <input name="gratificacion" type="number" min="0" step="0.01" value="0">
-    <small>Para el depósito de noviembre, la de julio. Para el de mayo, la de diciembre.</small>
+    <small>Escribe la gratificación de <span id="mes-gratificacion">julio</span>.</small>
   </label>
   <fieldset>
     <legend>Pagos variables por mes (horas extra, comisiones, bonos) (S/)</legend>

@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { analizarVariables, calcularCTS, remuneracionComputable } from '../static/js/calculos.js';
+import { analizarVariables, calcularCTS, proximoDeposito, remuneracionComputable } from '../static/js/calculos.js';
 
 test('remuneración computable suma 1/6 de la gratificación', () => {
   assert.equal(
@@ -80,4 +80,13 @@ test('3 meses con pago ya es regular y se divide entre 6', () => {
 test('rechaza pagos variables negativos o más de 6 meses', () => {
   assert.throws(() => analizarVariables([100, -50, 0, 0, 0, 0]));
   assert.throws(() => analizarVariables([1, 1, 1, 1, 1, 1, 1]));
+});
+
+test('próximo depósito según la fecha', () => {
+  assert.equal(proximoDeposito(new Date(2026, 9, 25)), 'noviembre'); // 25 de octubre
+  assert.equal(proximoDeposito(new Date(2026, 10, 15)), 'noviembre'); // 15 de noviembre: aún toca noviembre
+  assert.equal(proximoDeposito(new Date(2026, 10, 16)), 'mayo');
+  assert.equal(proximoDeposito(new Date(2027, 0, 10)), 'mayo');
+  assert.equal(proximoDeposito(new Date(2027, 4, 15)), 'mayo');
+  assert.equal(proximoDeposito(new Date(2027, 4, 16)), 'noviembre');
 });

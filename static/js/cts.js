@@ -1,8 +1,21 @@
-import { calcularCTS } from './calculos.js';
+import { SEMESTRES, calcularCTS, proximoDeposito } from './calculos.js';
 
 const form = document.querySelector('#form-cts');
 const salida = document.querySelector('#resultado-cts');
 const soles = (n) => n.toLocaleString('es-PE', { style: 'currency', currency: 'PEN' });
+
+// Cambia los nombres de los meses y la ayuda de la gratificación según el semestre elegido.
+function mostrarSemestre() {
+  const semestre = SEMESTRES[form.semestre.value];
+  document.querySelector('#mes-gratificacion').textContent = semestre.gratificacion;
+  form.querySelectorAll('[data-mes]').forEach((el) => {
+    el.textContent = semestre.meses[el.dataset.mes];
+  });
+}
+
+form.semestre.value = proximoDeposito(new Date());
+mostrarSemestre();
+form.semestre.addEventListener('change', mostrarSemestre);
 
 function explicarVariables({ mesesConPago, regular, promedio }) {
   if (mesesConPago === 0) return '';
