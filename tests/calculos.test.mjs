@@ -47,6 +47,12 @@ test('ingresó el 10 de agosto: 2 meses y 22 días', () => {
   assert.equal(calcularCTS({ sueldo: 3000, meses: 2, dias: 22 }).total, 683.33);
 });
 
+test('el total no se calcula sumando meses y días ya redondeados', () => {
+  // 1231/12 × 1 = 102.5833 ; 1231/360 × 10 = 34.1944 ; suma 136.7778 → 136.78
+  // (sumando las partes redondeadas saldría 102.58 + 34.19 = 136.77)
+  assert.equal(calcularCTS({ sueldo: 1231, meses: 1, dias: 10 }).total, 136.78);
+});
+
 test('pequeña empresa con media gratificación', () => {
   assert.equal(calcularCTS({ sueldo: 2000, gratificacion: 1000, meses: 6, regimen: 'pequena' }).total, 541.67);
 });

@@ -50,7 +50,13 @@ export function calcularCTS({ meses, dias = 0, regimen = 'general', ...rc }) {
     return { computable, porMeses: 0, porDias: 0, total: 0 };
   }
   const factor = REGIMENES[regimen];
-  const porMeses = redondear((exacta / 12) * meses * factor);
-  const porDias = redondear((exacta / 360) * dias * factor);
-  return { computable, porMeses, porDias, total: redondear(porMeses + porDias) };
+  const porMeses = (exacta / 12) * meses * factor;
+  const porDias = (exacta / 360) * dias * factor;
+  // El total se redondea desde los valores exactos, no sumando las partes ya redondeadas.
+  return {
+    computable,
+    porMeses: redondear(porMeses),
+    porDias: redondear(porDias),
+    total: redondear(porMeses + porDias),
+  };
 }
