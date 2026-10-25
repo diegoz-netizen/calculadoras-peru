@@ -1,0 +1,51 @@
+{% extends "guia.html" %}
+{% block h1 %}CTS en pequeña empresa y microempresa: cuánto te corresponde{% endblock %}
+{% block cuerpo %}
+<p>No todos los trabajadores reciben la misma CTS. Depende del régimen laboral de tu empresa: el general, el de pequeña empresa o el de microempresa. Las reglas especiales de pequeña y microempresa solo se aplican si la empresa está inscrita en el REMYPE, el registro del Ministerio de Trabajo. Si no lo está, se aplica el régimen general, aunque la empresa sea pequeña.</p>
+
+<h2>Cuánta CTS recibes según el régimen</h2>
+<table>
+  <thead>
+    <tr><th>Régimen</th><th>CTS</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>General (incluye empresas que no están en el REMYPE)</td><td>Una remuneración computable por año: la mitad en mayo y la mitad en noviembre, si trabajaste el semestre completo.</td></tr>
+    <tr><td>Pequeña empresa inscrita en el REMYPE</td><td>15 remuneraciones diarias por año completo, hasta un máximo de 90. Es la mitad que en el régimen general.</td></tr>
+    <tr><td>Microempresa inscrita en el REMYPE</td><td>No corresponde CTS, salvo si te contrataron antes de que la empresa se inscribiera.</td></tr>
+  </tbody>
+</table>
+<p>En la pequeña empresa la CTS se calcula con las mismas reglas del régimen general (remuneración computable, meses y días), pero el resultado se divide entre dos. Como cada año completo suma 15, el límite de 90 remuneraciones diarias se alcanza a los seis años. Nuestra calculadora calcula un solo semestre y no aplica ese límite.</p>
+
+<h2>Qué empresas son micro y pequeñas</h2>
+<p>Desde la Ley N.º 30056, la categoría depende solo de las ventas anuales de la empresa, no de cuántos trabajadores tiene:</p>
+<ul>
+  <li><strong>Microempresa:</strong> ventas de hasta 150 UIT al año.</li>
+  <li><strong>Pequeña empresa:</strong> ventas de más de 150 UIT y hasta 1,700 UIT al año.</li>
+</ul>
+<p>Pero cumplir esos montos no basta. Para que se apliquen los beneficios reducidos, la empresa tiene que inscribirse en el REMYPE. Algunas actividades, como bares, discotecas, casinos y juegos de azar, no pueden acogerse a este régimen.</p>
+
+<h2>Si te contrataron antes de que la empresa se inscribiera</h2>
+<p>Si ya trabajabas en la empresa cuando esta se inscribió en el REMYPE, conservas los beneficios que tenías. En la práctica, si trabajas en una microempresa pero te contrataron antes de su inscripción, sí te corresponde CTS, y se calcula como en el régimen general.</p>
+<p>Por eso es útil saber dos fechas: cuándo empezaste a trabajar (está en tu contrato o en tus boletas) y cuándo se inscribió la empresa (sale en la consulta del REMYPE, que te explicamos abajo).</p>
+
+<h2>Cómo saber si tu empresa está en el REMYPE</h2>
+<ol>
+  <li><strong>Busca el RUC de tu empresa.</strong> Aparece en tu boleta de pago y en tu contrato.</li>
+  <li><strong>Usa la consulta del REMYPE</strong> del Ministerio de Trabajo. Está en su portal web: busca «consulta REMYPE» y escribe el RUC. Te mostrará si la empresa está inscrita, si es micro o pequeña y desde qué fecha.</li>
+  <li><strong>Pregunta a recursos humanos</strong> si tienes dudas. Tienen que poder decirte en qué régimen laboral estás.</li>
+</ol>
+<p>Si la consulta dice que la empresa no está inscrita, te corresponde la CTS del régimen general.</p>
+
+<h3>Ejemplo</h3>
+<p>Luis gana S/ 1,800 al mes y trabajó de mayo a octubre de 2026 completos. Veamos su CTS de noviembre en dos empresas distintas:</p>
+<ul>
+  <li><strong>Pequeña empresa inscrita en el REMYPE.</strong> En julio recibió media gratificación: S/ 900. Remuneración computable: S/ 1,800 + S/ 900 ÷ 6 = S/ 1,950. CTS: S/ 1,950 ÷ 12 × 6 × 50 % = <strong>S/ 487.50</strong>.</li>
+  <li><strong>Empresa del régimen general.</strong> En julio recibió gratificación completa: S/ 1,800. Remuneración computable: S/ 1,800 + S/ 1,800 ÷ 6 = S/ 2,100. CTS: S/ 2,100 ÷ 12 × 6 = <strong>S/ 1,050</strong>.</li>
+  <li><strong>Microempresa inscrita en el REMYPE</strong>, contratado después de la inscripción: no recibe CTS.</li>
+</ul>
+<p>La diferencia es grande: por eso vale la pena revisar en qué régimen estás antes de reclamar o de aceptar un monto.</p>
+
+<h2>Otros beneficios que cambian</h2>
+<p>El régimen también cambia la gratificación, y eso afecta tu CTS porque la remuneración computable incluye 1/6 de la gratificación. En la pequeña empresa recibes media gratificación en julio y otra media en diciembre. En la microempresa no hay gratificación.</p>
+{% endblock %}
+{% block base_legal %}TUO de la Ley de Impulso al Desarrollo Productivo y al Crecimiento Empresarial (D.S. N.º 013-2013-PRODUCE), régimen laboral especial de la micro y pequeña empresa; Ley N.º 30056; TUO del Decreto Legislativo N.º 650, Ley de CTS (D.S. N.º 001-97-TR).{% endblock %}

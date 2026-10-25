@@ -5,4 +5,10 @@
 <ul class="tarjetas">
   <li><a href="/calculadora-cts/"><strong>Calculadora de CTS</strong><span>Depósitos de mayo y noviembre</span></a></li>
 </ul>
+{% if guias %}
+<h2>Guías sobre la CTS</h2>
+<ul class="tarjetas">
+  {% for g in guias %}<li><a href="{{ g.ruta }}"><strong>{{ g.nombre }}</strong><span>{{ g.descripcion }}</span></a></li>{% endfor %}
+</ul>
+{% endif %}
 {% endblock %}

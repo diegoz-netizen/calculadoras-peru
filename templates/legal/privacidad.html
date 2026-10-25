@@ -1,0 +1,20 @@
+{% extends "legal.html" %}
+{% block cuerpo %}
+<p>En {{ site.nombre }} queremos que uses las calculadoras sin entregar datos personales. Esta política explica qué información se procesa cuando visitas el sitio. Última actualización: {{ site.revision_legal }}.</p>
+
+<h2>Lo que escribes en las calculadoras no sale de tu equipo</h2>
+<p>Los cálculos se hacen en tu navegador, con JavaScript. Tu sueldo, tus pagos variables y los demás datos que escribes no se envían a ningún servidor, no se guardan y no los vemos. Si cierras o recargas la página, se borran.</p>
+<p>El botón «Copiar resultado» copia el texto en el portapapeles de tu equipo. El botón «Compartir por WhatsApp» abre WhatsApp con un mensaje que solo incluye el enlace a la página, no tus datos. Lo que hagas dentro de WhatsApp se rige por las políticas de WhatsApp.</p>
+
+<h2>Datos técnicos de las visitas</h2>
+<p>El sitio está alojado en Cloudflare. Como cualquier servidor web, Cloudflare recibe datos técnicos de cada visita (por ejemplo, tu dirección IP y el tipo de navegador) para entregar las páginas y proteger el sitio de ataques. No usamos esos datos para identificarte.</p>
+
+<h2>Si nos escribes</h2>
+<p>Si nos envías un correo, usaremos tu dirección y tu mensaje solo para responderte y, si nos reportas un error, para corregirlo. No los compartimos con nadie ni los usamos para enviarte publicidad.</p>
+
+<h2>Cookies, analítica y anuncios</h2>
+<p>Hoy el sitio no usa cookies, analítica ni anuncios. Si los incorporamos, actualizaremos esta política y la <a href="/cookies/">política de cookies</a> antes de activarlos, indicando qué empresa procesa los datos y cómo puedes desactivarlos.</p>
+
+<h2>Tus derechos</h2>
+<p>La Ley N.º 29733, Ley de Protección de Datos Personales, te da derecho a saber qué datos tuyos tenemos y a pedir que los corrijamos o eliminemos. Para ejercerlos, escríbenos a {{ site.contacto }}.</p>
+{% endblock %}

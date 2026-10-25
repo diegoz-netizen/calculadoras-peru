@@ -46,7 +46,7 @@ function computableExacta(datos) {
 /**
  * Pagos variables del semestre (horas extra, comisiones, bonos).
  * Solo cuentan si son regulares: recibidos en al menos 3 de los 6 meses
- * (TUO del D. Leg. 650, art. 16). El promedio es la suma entre 6 (art. 17).
+ * (TUO del D. Leg. 650, art. 16), y el promedio es la suma entre 6 (mismo artículo).
  * @param {number[]} montos  Hasta 6 montos, uno por mes; los meses que faltan valen 0.
  */
 export function analizarVariables(montos = []) {

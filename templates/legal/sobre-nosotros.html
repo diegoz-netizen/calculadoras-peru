@@ -1,0 +1,18 @@
+{% extends "legal.html" %}
+{% block cuerpo %}
+<p>{{ site.nombre }} es un proyecto independiente hecho en Perú. Queremos que cualquier trabajador pueda calcular sus beneficios laborales en pocos segundos, entender de dónde sale cada número y saber qué hacer si algo no cuadra.</p>
+
+<h2>De dónde salen las fórmulas</h2>
+<p>Cada calculadora aplica la fórmula de la norma oficial y la cita en la misma página. Por ejemplo, la calculadora de CTS usa el TUO del Decreto Legislativo N.º 650. Los montos que cambian por ley, como la remuneración mínima y la asignación familiar, se actualizan cuando se publica la norma. Las fórmulas y los montos se revisaron por última vez el {{ site.revision_legal }}.</p>
+
+<h2>Cómo comprobamos los cálculos</h2>
+<p>Antes de publicar una calculadora, calculamos varios casos a mano y comprobamos que la calculadora dé exactamente lo mismo, al céntimo. Esos casos se vuelven a comprobar automáticamente cada vez que cambiamos algo. Además, cada resultado muestra el cálculo paso a paso para que tú también puedas revisarlo.</p>
+
+<h2>Lo que no somos</h2>
+<p>No somos una entidad del Estado ni un estudio de abogados, y no tenemos relación con el Ministerio de Trabajo, SUNAFIL ni ningún banco. Los resultados son estimaciones: si vas a reclamar o tomar una decisión importante, confírmalos con un especialista. Lee nuestros <a href="/terminos/">términos de uso</a>.</p>
+
+<h2>Cómo se financia</h2>
+<p>El sitio es gratuito. Más adelante podría mostrar anuncios para cubrir sus costos. Los anuncios nunca cambiarán el resultado de una calculadora.</p>
+
+<p>¿Encontraste un error o quieres sugerir algo? <a href="/contacto/">Escríbenos</a>.</p>
+{% endblock %}

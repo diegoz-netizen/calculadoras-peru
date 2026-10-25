@@ -22,11 +22,13 @@ Ejecuta las tareas en orden. Marca cada casilla al terminarla y haz un commit po
 
 Cada página: al menos 600 palabras útiles, un ejemplo con números, preguntas frecuentes con datos estructurados FAQ, enlace a la calculadora y base legal. Dann revisa cada texto antes de publicar.
 
-- [ ] `/cts/fechas-de-deposito/`: fechas 2026 y 2027 y qué pasa si el empleador no deposita.
-- [ ] `/cts/pequena-empresa-y-microempresa/`: diferencias por régimen y cómo saber si tu empresa está en el REMYPE.
-- [ ] `/cts/retiro/`: Ley 32322, cuánto se puede retirar hasta el 31-dic-2026 y cómo pedirlo en el banco.
-- [ ] Completar privacidad, cookies, contacto y sobre nosotros con texto real (sin la etiqueta "Borrador").
-- [ ] Menú y pie con enlaces a todas las páginas; migas de pan (breadcrumbs) con datos estructurados.
+- [x] `/cts/fechas-de-deposito/`: fechas 2026 y 2027 y qué pasa si el empleador no deposita.
+- [x] `/cts/pequena-empresa-y-microempresa/`: diferencias por régimen y cómo saber si tu empresa está en el REMYPE.
+- [x] `/cts/retiro/`: Ley 32322, cuánto se puede retirar hasta el 31-dic-2026 y cómo pedirlo en el banco.
+- [x] Completar privacidad, cookies, contacto y sobre nosotros con texto real (sin la etiqueta "Borrador").
+- [x] Menú y pie con enlaces a todas las páginas; migas de pan (breadcrumbs) con datos estructurados.
+
+Estado: las páginas de la Fase 2 y las legales están escritas pero con `"borrador": True` en `build.py` (llevan noindex y no salen en el sitemap ni en los menús). Cuando Dann apruebe cada una, quitar esa marca. Para revisarlas en local: `python build.py --borradores`.
 
 ## Fase 3: más páginas y lanzamiento (semana del 9 nov)
 

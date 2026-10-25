@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ titulo }}</title>
   <meta name="description" content="{{ descripcion }}">
-  <meta name="robots" content="index,follow">
+  <meta name="robots" content="{{ 'noindex,follow' if borrador else 'index,follow' }}">
   <link rel="canonical" href="{{ site.dominio }}{{ ruta }}">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_PE">
@@ -20,18 +20,31 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/static/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/static/css/style.css">
+  {% if faq %}<script type="application/ld+json">{{ faq_jsonld | safe }}</script>{% endif %}
+  {% if migas %}<script type="application/ld+json">{{ migas_jsonld | safe }}</script>{% endif %}
   {% block head %}{% endblock %}
   <!-- Aquí irá el script de AdSense cuando aprueben la cuenta -->
 </head>
 <body>
   <header class="wrap">
     <a class="logo" href="/">{{ site.nombre }}</a>
-    <nav><a href="/calculadora-cts/">CTS</a></nav>
+    <nav><a href="/calculadora-cts/">Calculadora de CTS</a></nav>
   </header>
   <main class="wrap">
+    {% if migas %}
+    <nav class="migas" aria-label="Migas de pan">
+      {% for nombre, url in migas %}{% if loop.last %}<span aria-current="page">{{ nombre }}</span>{% else %}<a href="{{ url }}">{{ nombre }}</a> › {% endif %}{% endfor %}
+    </nav>
+    {% endif %}
+    {% if borrador %}<p class="borrador">Borrador: este texto está pendiente de revisión.</p>{% endif %}
     {% block contenido %}{% endblock %}
   </main>
   <footer class="wrap">
+    {% if guias %}
+    <p><strong>Guías sobre la CTS:</strong>
+      <a href="/calculadora-cts/">Calculadora de CTS</a>{% for g in guias %} · <a href="{{ g.ruta }}">{{ g.nombre }}</a>{% endfor %}
+    </p>
+    {% endif %}
     <p>Los cálculos son referenciales y no reemplazan la asesoría de un especialista.</p>
     <p>
       <a href="/privacidad/">Privacidad</a> ·

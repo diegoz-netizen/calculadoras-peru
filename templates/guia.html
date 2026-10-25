@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{# Plantilla común de las guías: cada guía define h1, cuerpo y base_legal. #}
+{% block contenido %}
+<h1>{% block h1 %}{% endblock %}</h1>
+{% block cuerpo %}{% endblock %}
+
+<p class="cta"><a class="boton principal" href="/calculadora-cts/">Calcula tu CTS</a></p>
+
+{% if faq %}
+<h2>Preguntas frecuentes</h2>
+{% for p in faq %}
+<h3>{{ p.q }}</h3>
+<p>{{ p.a }}</p>
+{% endfor %}
+{% endif %}
+
+<p class="base-legal">Base legal: {% block base_legal %}{% endblock %} Información revisada el {{ site.revision_legal }}. Es referencial y no reemplaza la asesoría de un especialista.</p>
+
+{% set otras = guias | rejectattr("ruta", "equalto", ruta) | list %}
+{% if otras %}
+<h2>Sigue leyendo</h2>
+<ul class="relacionadas">
+  {% for g in otras %}<li><a href="{{ g.ruta }}">{{ g.nombre }}</a></li>{% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
