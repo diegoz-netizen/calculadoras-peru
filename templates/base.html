@@ -6,6 +6,17 @@
   <title>{{ titulo }}</title>
   <meta name="description" content="{{ descripcion }}">
   <link rel="canonical" href="{{ site.dominio }}{{ ruta }}">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_PE">
+  <meta property="og:site_name" content="{{ site.nombre }}">
+  <meta property="og:title" content="{{ titulo }}">
+  <meta property="og:description" content="{{ descripcion }}">
+  <meta property="og:url" content="{{ site.dominio }}{{ ruta }}">
+  <meta property="og:image" content="{{ site.dominio }}/static/img/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{ site.nombre }}: calcula tu CTS en segundos">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="/static/css/style.css">
   {% block head %}{% endblock %}
   <!-- Aquí irá el script de AdSense cuando aprueben la cuenta -->
