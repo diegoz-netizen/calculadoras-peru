@@ -22,16 +22,25 @@ export function remuneracionComputable(datos) {
   return redondear(computableExacta(datos));
 }
 
-// Sin redondear: el redondeo se hace solo al final para no arrastrar céntimos.
-function computableExacta({
+// Partes de la remuneración computable, sin redondear: el redondeo se hace solo al final.
+function partesComputable({
   sueldo,
   asignacionFamiliar = false,
   montoAsignacion = 0,
   gratificacion = 0,
   variables = [],
 }) {
-  const asignacion = asignacionFamiliar ? montoAsignacion : 0;
-  return sueldo + asignacion + gratificacion / 6 + analizarVariables(variables).promedio;
+  return {
+    sueldo,
+    asignacion: asignacionFamiliar ? montoAsignacion : 0,
+    sextoGratificacion: gratificacion / 6,
+    promedioVariables: analizarVariables(variables).promedio,
+  };
+}
+
+function computableExacta(datos) {
+  const p = partesComputable(datos);
+  return p.sueldo + p.asignacion + p.sextoGratificacion + p.promedioVariables;
 }
 
 /**
@@ -62,9 +71,13 @@ export function calcularCTS({ meses, dias = 0, regimen = 'general', ...rc }) {
   const computable = redondear(exacta);
   const { mesesConPago, regular, promedio } = analizarVariables(rc.variables);
   const variables = { mesesConPago, regular, promedio: redondear(promedio) };
+  // Cada parte redondeada solo para mostrarla; los cálculos usan los valores exactos.
+  const partes = Object.fromEntries(
+    Object.entries(partesComputable(rc)).map(([k, v]) => [k, redondear(v)]),
+  );
   // Si no completó al menos un mes de servicio, no corresponde CTS.
   if (meses === 0) {
-    return { computable, variables, porMeses: 0, porDias: 0, total: 0 };
+    return { computable, partes, variables, factor: REGIMENES[regimen], porMeses: 0, porDias: 0, total: 0 };
   }
   const factor = REGIMENES[regimen];
   const porMeses = (exacta / 12) * meses * factor;
@@ -72,7 +85,9 @@ export function calcularCTS({ meses, dias = 0, regimen = 'general', ...rc }) {
   // El total se redondea desde los valores exactos, no sumando las partes ya redondeadas.
   return {
     computable,
+    partes,
     variables,
+    factor,
     porMeses: redondear(porMeses),
     porDias: redondear(porDias),
     total: redondear(porMeses + porDias),

@@ -62,6 +62,17 @@
   <a class="boton secundario" href="https://wa.me/?text={{ ('Calcula tu CTS gratis y en segundos: ' ~ site.dominio ~ ruta) | urlencode }}" target="_blank" rel="noopener">Compartir por WhatsApp</a>
 </div>
 
+<aside class="aviso" id="limites">
+  <p><strong>Este resultado es una estimación.</strong> Sirve para revisar tu depósito, pero el monto oficial lo calcula tu empleador. El cálculo usa solo los datos que escribiste:</p>
+  <ul>
+    <li>Considera tu sueldo básico, la asignación familiar, la gratificación del semestre y tus pagos variables. Si recibes otros pagos fijos cada mes, tu CTS real puede ser distinta: revisa tu boleta.</li>
+    <li>Supone que trabajas al menos 4 horas diarias en una empresa privada del régimen general o del REMYPE. No sirve para regímenes especiales, como construcción civil o el régimen agrario, ni para el sector público.</li>
+    <li>Los meses y días los indicas tú. Si tuviste faltas o licencias en el semestre, el monto real puede variar.</li>
+    <li>Usa la asignación familiar vigente: S/ {{ site.asignacion_familiar }} (10 % de la remuneración mínima de S/ {{ site.rmv }}). Fórmulas y montos revisados el {{ site.revision_legal }}.</li>
+  </ul>
+  <p>Si tu empleador te depositó un monto distinto, pídele la liquidación de tu CTS y compárala con este cálculo. Si la diferencia continúa, puedes pedir orientación gratuita al Ministerio de Trabajo o presentar una denuncia ante SUNAFIL. ¿Crees que la calculadora tiene un error? <a href="/contacto/">Escríbenos</a> y lo revisamos.</p>
+</aside>
+
 <h2>¿Cómo se calcula la CTS?</h2>
 <p>Primero se obtiene la <strong>remuneración computable</strong>: sueldo básico + asignación familiar + 1/6 de la gratificación del semestre + promedio de pagos variables regulares.</p>
 <p>Los pagos variables (horas extra, comisiones, bonos) solo se suman si son <strong>regulares</strong>: si los recibiste en al menos 3 de los 6 meses del semestre. En ese caso se suman los 6 meses y el total se divide entre 6, aunque algún mes haya sido 0 (TUO del D. Leg. 650, arts. 16 y 17).</p>

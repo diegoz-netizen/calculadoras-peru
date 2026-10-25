@@ -36,6 +36,18 @@ LEGALES = {
     "/cookies/": ("Política de cookies", "<p>Tipos de cookies que usan los anuncios y la analítica, y cómo desactivarlas.</p>"),
     "/contacto/": ("Contacto", f"<p>Escríbenos a {site['contacto']}.</p>"),
     "/sobre-nosotros/": ("Sobre nosotros", "<p>Quién hace el sitio y de dónde salen las fórmulas.</p>"),
+    "/terminos/": ("Términos de uso", f"""
+<h2>Los resultados son estimaciones</h2>
+<p>Las calculadoras de {site['nombre']} aplican las fórmulas de la ley laboral peruana a los datos que tú escribes. El resultado es una estimación referencial: no es una liquidación oficial ni obliga a tu empleador a pagar ese monto.</p>
+<h2>No es asesoría legal</h2>
+<p>El contenido del sitio es informativo y no reemplaza la asesoría de un abogado laboralista, del Ministerio de Trabajo o de SUNAFIL. Antes de reclamar a tu empleador o tomar una decisión, verifica tu caso con ellos.</p>
+<h2>Cómo calculamos</h2>
+<p>Cada calculadora muestra la fórmula, la base legal y el cálculo paso a paso con tus números, para que puedas revisarlo. También indica qué casos no cubre. Las fórmulas y los montos legales (remuneración mínima, asignación familiar) se revisaron por última vez el {site['revision_legal']}. Si la ley cambia, actualizaremos el sitio, pero puede pasar un tiempo hasta que lo hagamos.</p>
+<h2>Errores</h2>
+<p>Revisamos las fórmulas con casos calculados a mano, pero puede haber errores. Si encuentras uno, escríbenos a {site['contacto']} y lo corregiremos. No nos hacemos responsables por decisiones tomadas solo con base en los resultados del sitio.</p>
+<h2>Tus datos</h2>
+<p>Los cálculos se hacen en tu navegador. No guardamos ni enviamos el sueldo ni los demás datos que escribes en las calculadoras.</p>
+"""),
 }
 for ruta, (h1, cuerpo) in LEGALES.items():
     PAGINAS.append({"ruta": ruta, "plantilla": "legal.html", "h1": h1, "cuerpo": cuerpo,

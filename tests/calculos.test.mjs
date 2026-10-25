@@ -90,3 +90,10 @@ test('próximo depósito según la fecha', () => {
   assert.equal(proximoDeposito(new Date(2027, 4, 15)), 'mayo');
   assert.equal(proximoDeposito(new Date(2027, 4, 16)), 'noviembre');
 });
+
+test('devuelve las partes de la remuneración computable para mostrar el cálculo', () => {
+  // 1243 / 6 = 207.1667 → se muestra 207.17
+  const r = calcularCTS({ sueldo: 1230, asignacionFamiliar: true, montoAsignacion: 123, gratificacion: 1243, meses: 6, regimen: 'pequena' });
+  assert.deepEqual(r.partes, { sueldo: 1230, asignacion: 123, sextoGratificacion: 207.17, promedioVariables: 0 });
+  assert.equal(r.factor, 0.5);
+});

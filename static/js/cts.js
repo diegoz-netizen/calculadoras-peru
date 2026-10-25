@@ -36,6 +36,33 @@ function explicarVariables({ mesesConPago, regular, promedio }) {
     La ley pide que sean regulares, es decir, que los recibas en al menos 3 de los 6 meses del semestre.</p>`;
 }
 
+const REGIMEN_TEXTO = { pequena: 'pequeña empresa: la mitad', micro: 'microempresa: no corresponde' };
+
+// El cálculo con los números del usuario, para que pueda revisarlo paso a paso.
+function pasos(r, gratificacion, meses, dias) {
+  const { partes, computable, factor } = r;
+  const ajuste = factor === 1 ? '' : ` × ${factor * 100} % (${REGIMEN_TEXTO[form.regimen.value]})`;
+  const computableTexto = `<li><strong>Remuneración computable:</strong>
+      sueldo ${soles(partes.sueldo)}
+      + asignación familiar ${soles(partes.asignacion)}
+      + 1/6 de la gratificación (${soles(gratificacion)} ÷ 6 = ${soles(partes.sextoGratificacion)})
+      + promedio de pagos variables ${soles(partes.promedioVariables)}
+      = <strong>${soles(computable)}</strong></li>`;
+  if (meses === 0) {
+    return `<h3>Cómo se calculó</h3><ol class="pasos">${computableTexto}
+      <li>No completaste un mes de trabajo en el semestre, así que todavía no corresponde CTS.</li></ol>`;
+  }
+  return `<h3>Cómo se calculó</h3>
+    <ol class="pasos">
+      ${computableTexto}
+      <li><strong>Por meses completos:</strong> ${soles(computable)} ÷ 12 × ${meses}${ajuste} = ${soles(r.porMeses)}</li>
+      <li><strong>Por días:</strong> ${soles(computable)} ÷ 360 × ${dias}${ajuste} = ${soles(r.porDias)}</li>
+      <li><strong>Total:</strong> ${soles(r.porMeses)} + ${soles(r.porDias)} = <strong>${soles(r.total)}</strong></li>
+    </ol>
+    <p class="nota">Cada paso se muestra redondeado a 2 decimales, pero el cálculo usa todos los decimales.
+      Por eso, si sumas los pasos a mano, puede salirte 1 céntimo de diferencia.</p>`;
+}
+
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const d = new FormData(form);
@@ -52,15 +79,11 @@ form.addEventListener('submit', (e) => {
     });
     salida.innerHTML = `
       <p class="total">Tu CTS estimada: <strong>${soles(r.total)}</strong></p>
-      <ul>
-        <li>Remuneración computable: ${soles(r.computable)}</li>
-        <li>Por meses completos: ${soles(r.porMeses)}</li>
-        <li>Por días: ${soles(r.porDias)}</li>
-      </ul>
+      ${pasos(r, Number(d.get('gratificacion') || 0), Number(d.get('meses')), Number(d.get('dias') || 0))}
       ${explicarVariables(r.variables)}
       ${form.regimen.value === 'micro' ? `<p>En una microempresa inscrita en el REMYPE no corresponde CTS. ${notaMicro.textContent} En ese caso, elige «Régimen general» para calcularla.</p>` : ''}`;
     textoResultado = [
-      `Mi CTS estimada (depósito de ${form.semestre.value}): ${soles(r.total)}`,
+      `Mi CTS estimada (depósito de ${form.semestre.value}): ${soles(r.total)} (referencial)`,
       `- Remuneración computable: ${soles(r.computable)}`,
       `- Por meses completos: ${soles(r.porMeses)}`,
       `- Por días: ${soles(r.porDias)}`,

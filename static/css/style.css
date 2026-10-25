@@ -24,6 +24,9 @@ button { font:inherit; font-weight:700; padding:12px; border:0; border-radius:8p
 .acciones { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
 .boton { display:inline-block; font-weight:700; padding:12px; border-radius:8px; text-decoration:none; }
 .secundario { background:transparent; color:var(--accent); border:1px solid var(--accent); }
+.aviso { margin-top:20px; padding:4px 16px; border:1px solid var(--border); border-radius:10px; font-size:.95rem; }
+.pasos { padding-left:20px; display:grid; gap:6px; }
+.nota { color:var(--muted); font-size:.9rem; }
 .total { font-size:1.25rem; margin:0 0 8px; }
 .error { color:#c62828; }
 .tarjetas { list-style:none; padding:0; display:grid; gap:12px; }
