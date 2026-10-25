@@ -16,7 +16,7 @@ Ejecuta las tareas en orden. Marca cada casilla al terminarla y haz un commit po
 - [x] Botón "Copiar resultado" y enlace para compartir por WhatsApp (ayuda a que la gente difunda la página).
 - [x] Metaetiquetas Open Graph (título, descripción, imagen) para que el enlace se vea bien en WhatsApp y Facebook.
 - [x] Añadir `lastmod` al sitemap y `<meta name="robots" content="index,follow">`.
-- [ ] Revisar con Lighthouse (Playwright o Chrome) que Rendimiento y SEO den 95 o más en celular.
+- [x] Revisar con Lighthouse (Playwright o Chrome) que Rendimiento y SEO den 95 o más en celular.
 
 ## Fase 2: contenido alrededor de la CTS (semana del 2 nov)
 

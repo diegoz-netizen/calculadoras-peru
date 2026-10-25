@@ -1,6 +1,6 @@
-:root { --fg:#1b1f24; --bg:#fff; --muted:#5b6470; --accent:#0b6bcb; --card:#f4f6f8; --border:#d8dde3; }
+:root { --fg:#1b1f24; --bg:#fff; --muted:#5b6470; --accent:#0b6bcb; --on-accent:#fff; --card:#f4f6f8; --border:#d8dde3; }
 @media (prefers-color-scheme: dark) {
-  :root { --fg:#e8eaed; --bg:#121417; --muted:#a0a8b3; --accent:#5aa9ff; --card:#1c2026; --border:#2e343c; }
+  :root { --fg:#e8eaed; --bg:#121417; --muted:#a0a8b3; --accent:#5aa9ff; --on-accent:#0b1a2b; --card:#1c2026; --border:#2e343c; }
 }
 * { box-sizing: border-box; }
 body { margin:0; font:16px/1.6 system-ui, sans-serif; color:var(--fg); background:var(--bg); }
@@ -19,7 +19,7 @@ a { color:var(--accent); }
 @media (max-width:480px) { .meses { grid-template-columns:1fr 1fr; } }
 .fila { display:grid; grid-template-columns:1fr 1fr; gap:12px; align-items:end; }
 input, select { font:inherit; padding:10px; border:1px solid var(--border); border-radius:8px; background:var(--bg); color:var(--fg); }
-button { font:inherit; font-weight:700; padding:12px; border:0; border-radius:8px; background:var(--accent); color:#fff; cursor:pointer; }
+button { font:inherit; font-weight:700; padding:12px; border:0; border-radius:8px; background:var(--accent); color:var(--on-accent); cursor:pointer; }
 .resultado { margin-top:16px; padding:16px; border-left:4px solid var(--accent); background:var(--card); border-radius:6px; }
 .acciones { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
 .boton { display:inline-block; font-weight:700; padding:12px; border-radius:8px; text-decoration:none; }
