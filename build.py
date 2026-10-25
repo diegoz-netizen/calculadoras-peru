@@ -1,6 +1,8 @@
 """Genera el sitio estático en dist/. Uso: python build.py"""
 import json
 import shutil
+import subprocess
+from datetime import date
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
@@ -49,6 +51,18 @@ def faq_jsonld(faq):
     }, ensure_ascii=False)
 
 
+def ultima_modificacion(pagina):
+    """Fecha del último commit que tocó la plantilla de la página, site.json o build.py.
+    Si git no está disponible, usa la fecha de hoy."""
+    archivos = [f"templates/{pagina['plantilla']}", "site.json", "build.py"]
+    try:
+        fecha = subprocess.run(["git", "log", "-1", "--format=%cs", "--", *archivos],
+                               cwd=RAIZ, capture_output=True, text=True, check=True).stdout.strip()
+    except (OSError, subprocess.CalledProcessError):
+        fecha = ""
+    return fecha or date.today().isoformat()
+
+
 def main():
     shutil.rmtree(DIST, ignore_errors=True)
     shutil.copytree(RAIZ / "static", DIST / "static")
@@ -59,7 +73,8 @@ def main():
         destino.parent.mkdir(parents=True, exist_ok=True)
         destino.write_text(html, encoding="utf-8")
 
-    urls = "".join(f"<url><loc>{site['dominio']}{p['ruta']}</loc></url>" for p in PAGINAS)
+    urls = "".join(f"<url><loc>{site['dominio']}{p['ruta']}</loc><lastmod>{ultima_modificacion(p)}</lastmod></url>"
+                   for p in PAGINAS)
     (DIST / "sitemap.xml").write_text(
         f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>',
         encoding="utf-8")
