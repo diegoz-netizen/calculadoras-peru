@@ -4,9 +4,9 @@ Ejecuta las tareas en orden. Marca cada casilla al terminarla y haz un commit po
 
 ## Fase 0: repositorio (hoy)
 
-- [ ] `git init`, primer commit con el código actual. Rama `main`.
+- [x] `git init`, primer commit con el código actual. Rama `main`.
 - [ ] Dann crea un repositorio vacío en GitHub. Conectar el remoto y hacer `git push -u origin main`.
-- [ ] Verificar que `npm test` pasa (10 tests) y que `python build.py` genera `dist/` sin errores.
+- [x] Verificar que `npm test` pasa (10 tests) y que `python build.py` genera `dist/` sin errores.
 
 ## Fase 1: mejorar la calculadora de CTS (semana del 26 oct)
 
