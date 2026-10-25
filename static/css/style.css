@@ -11,6 +11,12 @@ a { color:var(--accent); }
 .calc { display:grid; gap:14px; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:18px; }
 .calc label { display:grid; gap:4px; font-weight:600; }
 .calc small { font-weight:400; color:var(--muted); }
+.calc fieldset { display:grid; gap:8px; margin:0; padding:12px; border:1px solid var(--border); border-radius:8px; }
+.calc legend { font-weight:600; padding:0 4px; }
+.meses { display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; }
+.calc .meses label { font-weight:400; }
+.meses input { width:100%; min-width:0; }
+@media (max-width:480px) { .meses { grid-template-columns:1fr 1fr; } }
 .fila { display:grid; grid-template-columns:1fr 1fr; gap:12px; align-items:end; }
 input, select { font:inherit; padding:10px; border:1px solid var(--border); border-radius:8px; background:var(--bg); color:var(--fg); }
 button { font:inherit; font-weight:700; padding:12px; border:0; border-radius:8px; background:var(--accent); color:#fff; cursor:pointer; }

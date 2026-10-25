@@ -16,7 +16,7 @@ const redondear = (n) => Math.round(n * 100) / 100;
  * @param {boolean} p.asignacionFamiliar  Si percibe asignación familiar.
  * @param {number} p.montoAsignacion   Monto de la asignación familiar vigente (S/).
  * @param {number} p.gratificacion     Gratificación percibida en el semestre (S/). Se suma 1/6.
- * @param {number} p.promedioVariable  Promedio de remuneraciones variables regulares (S/).
+ * @param {number[]} p.variables     Pagos variables de cada mes del semestre (6 montos, S/).
  */
 export function remuneracionComputable(datos) {
   return redondear(computableExacta(datos));
@@ -28,10 +28,25 @@ function computableExacta({
   asignacionFamiliar = false,
   montoAsignacion = 0,
   gratificacion = 0,
-  promedioVariable = 0,
+  variables = [],
 }) {
   const asignacion = asignacionFamiliar ? montoAsignacion : 0;
-  return sueldo + asignacion + gratificacion / 6 + promedioVariable;
+  return sueldo + asignacion + gratificacion / 6 + analizarVariables(variables).promedio;
+}
+
+/**
+ * Pagos variables del semestre (horas extra, comisiones, bonos).
+ * Solo cuentan si son regulares: recibidos en al menos 3 de los 6 meses
+ * (TUO del D. Leg. 650, art. 16). El promedio es la suma entre 6 (art. 17).
+ * @param {number[]} montos  Hasta 6 montos, uno por mes; los meses que faltan valen 0.
+ */
+export function analizarVariables(montos = []) {
+  if (montos.length > 6) throw new Error('Un semestre tiene como máximo 6 meses');
+  if (montos.some((m) => !(m >= 0))) throw new Error('Los pagos variables no pueden ser negativos');
+  const mesesConPago = montos.filter((m) => m > 0).length;
+  const regular = mesesConPago >= 3;
+  const suma = montos.reduce((a, m) => a + m, 0);
+  return { mesesConPago, regular, promedio: regular ? suma / 6 : 0 };
 }
 
 /**
@@ -45,9 +60,11 @@ export function calcularCTS({ meses, dias = 0, regimen = 'general', ...rc }) {
 
   const exacta = computableExacta(rc);
   const computable = redondear(exacta);
+  const { mesesConPago, regular, promedio } = analizarVariables(rc.variables);
+  const variables = { mesesConPago, regular, promedio: redondear(promedio) };
   // Si no completó al menos un mes de servicio, no corresponde CTS.
   if (meses === 0) {
-    return { computable, porMeses: 0, porDias: 0, total: 0 };
+    return { computable, variables, porMeses: 0, porDias: 0, total: 0 };
   }
   const factor = REGIMENES[regimen];
   const porMeses = (exacta / 12) * meses * factor;
@@ -55,6 +72,7 @@ export function calcularCTS({ meses, dias = 0, regimen = 'general', ...rc }) {
   // El total se redondea desde los valores exactos, no sumando las partes ya redondeadas.
   return {
     computable,
+    variables,
     porMeses: redondear(porMeses),
     porDias: redondear(porDias),
     total: redondear(porMeses + porDias),

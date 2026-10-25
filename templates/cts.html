@@ -21,10 +21,17 @@
     <input name="gratificacion" type="number" min="0" step="0.01" value="0">
     <small>Para el depósito de noviembre, la de julio. Para el de mayo, la de diciembre.</small>
   </label>
-  <label>Promedio de pagos variables (horas extra, comisiones) (S/)
-    <input name="variable" type="number" min="0" step="0.01" value="0">
-    <small>Solo si los recibiste en al menos 3 de los 6 meses.</small>
-  </label>
+  <fieldset>
+    <legend>Pagos variables por mes (horas extra, comisiones, bonos) (S/)</legend>
+    <small>Escribe lo que recibiste cada mes. Deja 0 en los meses sin pago. Solo se suman si los recibiste en al menos 3 de los 6 meses.</small>
+    <div class="meses">
+      {% for mes in ["Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre"] %}
+      <label><span data-mes="{{ loop.index0 }}">{{ mes }}</span>
+        <input name="variable" type="number" min="0" step="0.01" value="0" inputmode="decimal">
+      </label>
+      {% endfor %}
+    </div>
+  </fieldset>
   <div class="fila">
     <label>Meses completos trabajados
       <input name="meses" type="number" min="0" max="6" required>
@@ -46,6 +53,7 @@
 
 <h2>¿Cómo se calcula la CTS?</h2>
 <p>Primero se obtiene la <strong>remuneración computable</strong>: sueldo básico + asignación familiar + 1/6 de la gratificación del semestre + promedio de pagos variables regulares.</p>
+<p>Los pagos variables (horas extra, comisiones, bonos) solo se suman si son <strong>regulares</strong>: si los recibiste en al menos 3 de los 6 meses del semestre. En ese caso se suman los 6 meses y el total se divide entre 6, aunque algún mes haya sido 0 (TUO del D. Leg. 650, arts. 16 y 17).</p>
 <p>Luego: <strong>CTS = remuneración computable ÷ 12 × meses + remuneración computable ÷ 360 × días</strong>.</p>
 
 <h3>Ejemplo</h3>

@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { calcularCTS, remuneracionComputable } from '../static/js/calculos.js';
+import { analizarVariables, calcularCTS, remuneracionComputable } from '../static/js/calculos.js';
 
 test('remuneración computable suma 1/6 de la gratificación', () => {
   assert.equal(
@@ -58,5 +58,26 @@ test('pequeña empresa con media gratificación', () => {
 });
 
 test('horas extra regulares (4 de 6 meses)', () => {
-  assert.equal(calcularCTS({ sueldo: 2500, gratificacion: 2500, promedioVariable: 490 / 6, meses: 6 }).total, 1499.17);
+  // Suma 490 / 6 = 81.6667 ; RC = 2500 + 2500/6 + 81.6667 = 2998.3333 → /12 × 6 = 1499.17
+  const r = calcularCTS({ sueldo: 2500, gratificacion: 2500, variables: [100, 0, 120, 150, 0, 120], meses: 6 });
+  assert.equal(r.total, 1499.17);
+  assert.deepEqual(r.variables, { mesesConPago: 4, regular: true, promedio: 81.67 });
+});
+
+test('pagos variables en solo 2 meses no se suman', () => {
+  // RC = 2500 + 2500/6 = 2916.6667 → /12 × 6 = 1458.33
+  const r = calcularCTS({ sueldo: 2500, gratificacion: 2500, variables: [300, 0, 0, 250, 0, 0], meses: 6 });
+  assert.equal(r.total, 1458.33);
+  assert.deepEqual(r.variables, { mesesConPago: 2, regular: false, promedio: 0 });
+});
+
+test('3 meses con pago ya es regular y se divide entre 6', () => {
+  // 600 / 6 = 100 ; RC = 2000 + 100 = 2100 → /12 × 6 = 1050
+  assert.deepEqual(analizarVariables([200, 200, 200, 0, 0, 0]), { mesesConPago: 3, regular: true, promedio: 100 });
+  assert.equal(calcularCTS({ sueldo: 2000, variables: [200, 200, 200, 0, 0, 0], meses: 6 }).total, 1050);
+});
+
+test('rechaza pagos variables negativos o más de 6 meses', () => {
+  assert.throws(() => analizarVariables([100, -50, 0, 0, 0, 0]));
+  assert.throws(() => analizarVariables([1, 1, 1, 1, 1, 1, 1]));
 });
