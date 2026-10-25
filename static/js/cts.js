@@ -13,6 +13,11 @@ function mostrarSemestre() {
   });
 }
 
+const notaMicro = document.querySelector('#nota-micro');
+const mostrarNotaMicro = () => { notaMicro.hidden = form.regimen.value !== 'micro'; };
+form.regimen.addEventListener('change', mostrarNotaMicro);
+mostrarNotaMicro();
+
 form.semestre.value = proximoDeposito(new Date());
 mostrarSemestre();
 form.semestre.addEventListener('change', mostrarSemestre);
@@ -49,7 +54,8 @@ form.addEventListener('submit', (e) => {
         <li>Por meses completos: ${soles(r.porMeses)}</li>
         <li>Por días: ${soles(r.porDias)}</li>
       </ul>
-      ${explicarVariables(r.variables)}`;
+      ${explicarVariables(r.variables)}
+      ${form.regimen.value === 'micro' ? `<p>En una microempresa inscrita en el REMYPE no corresponde CTS. ${notaMicro.textContent} En ese caso, elige «Régimen general» para calcularla.</p>` : ''}`;
   } catch (err) {
     salida.innerHTML = `<p class="error">${err.message}</p>`;
   }

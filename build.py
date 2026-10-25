@@ -14,7 +14,7 @@ FAQ_CTS = [
     {"q": "¿Cuándo se deposita la CTS?",
      "a": "Dos veces al año: hasta el 15 de mayo (por noviembre a abril) y hasta el 15 de noviembre (por mayo a octubre)."},
     {"q": "¿Quién tiene derecho a CTS?",
-     "a": "Los trabajadores del régimen privado con una jornada mínima de 4 horas diarias y al menos un mes de servicio. En microempresas inscritas en el REMYPE no corresponde."},
+     "a": "Los trabajadores del régimen privado con una jornada mínima de 4 horas diarias y al menos un mes de servicio. En microempresas inscritas en el REMYPE no corresponde, salvo para quienes fueron contratados antes de que la empresa se inscribiera."},
     {"q": "¿Cuánto recibo en una pequeña empresa?",
      "a": "La mitad que en el régimen general: 15 remuneraciones diarias por año de servicio."},
 ]
