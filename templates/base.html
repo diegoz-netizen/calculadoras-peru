@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ titulo }}</title>
+  <meta name="description" content="{{ descripcion }}">
+  <link rel="canonical" href="{{ site.dominio }}{{ ruta }}">
+  <link rel="stylesheet" href="/static/css/style.css">
+  {% block head %}{% endblock %}
+  <!-- Aquí irá el script de AdSense cuando aprueben la cuenta -->
+</head>
+<body>
+  <header class="wrap">
+    <a class="logo" href="/">{{ site.nombre }}</a>
+    <nav><a href="/calculadora-cts/">CTS</a></nav>
+  </header>
+  <main class="wrap">
+    {% block contenido %}{% endblock %}
+  </main>
+  <footer class="wrap">
+    <p>Los cálculos son referenciales y no reemplazan la asesoría de un especialista.</p>
+    <p>
+      <a href="/privacidad/">Privacidad</a> ·
+      <a href="/cookies/">Cookies</a> ·
+      <a href="/contacto/">Contacto</a> ·
+      <a href="/sobre-nosotros/">Sobre nosotros</a>
+    </p>
+    <p>© {{ site.anio }} {{ site.nombre }}</p>
+  </footer>
+</body>
+</html>

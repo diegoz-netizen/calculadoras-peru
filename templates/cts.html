@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block head %}
+<script type="module" src="/static/js/cts.js"></script>
+<script type="application/ld+json">{{ faq_jsonld | safe }}</script>
+{% endblock %}
+{% block contenido %}
+<h1>Calculadora de CTS {{ site.anio }}</h1>
+<p>Calcula cuánto te deben depositar de CTS (Compensación por Tiempo de Servicios) en mayo o noviembre, según tu sueldo, tu asignación familiar y el tiempo trabajado en el semestre.</p>
+
+<form id="form-cts" class="calc" data-asignacion="{{ site.asignacion_familiar }}">
+  <label>Sueldo básico mensual (S/)
+    <input name="sueldo" type="number" min="0" step="0.01" required>
+  </label>
+  <label>¿Recibes asignación familiar?
+    <select name="asignacion">
+      <option value="no">No</option>
+      <option value="si">Sí (S/ {{ site.asignacion_familiar }})</option>
+    </select>
+  </label>
+  <label>Gratificación recibida en el semestre (S/)
+    <input name="gratificacion" type="number" min="0" step="0.01" value="0">
+    <small>Para el depósito de noviembre, la de julio. Para el de mayo, la de diciembre.</small>
+  </label>
+  <label>Promedio de pagos variables (horas extra, comisiones) (S/)
+    <input name="variable" type="number" min="0" step="0.01" value="0">
+    <small>Solo si los recibiste en al menos 3 de los 6 meses.</small>
+  </label>
+  <div class="fila">
+    <label>Meses completos trabajados
+      <input name="meses" type="number" min="0" max="6" required>
+    </label>
+    <label>Días adicionales
+      <input name="dias" type="number" min="0" max="29" value="0">
+    </label>
+  </div>
+  <label>Tipo de empresa
+    <select name="regimen">
+      <option value="general">Régimen general</option>
+      <option value="pequena">Pequeña empresa (REMYPE)</option>
+      <option value="micro">Microempresa (REMYPE)</option>
+    </select>
+  </label>
+  <button type="submit">Calcular CTS</button>
+</form>
+<div id="resultado-cts" class="resultado" hidden aria-live="polite"></div>
+
+<h2>¿Cómo se calcula la CTS?</h2>
+<p>Primero se obtiene la <strong>remuneración computable</strong>: sueldo básico + asignación familiar + 1/6 de la gratificación del semestre + promedio de pagos variables regulares.</p>
+<p>Luego: <strong>CTS = remuneración computable ÷ 12 × meses + remuneración computable ÷ 360 × días</strong>.</p>
+
+<h3>Ejemplo</h3>
+<p>Ganas S/ 2,400, recibiste S/ 2,400 de gratificación en julio y trabajaste los 6 meses (mayo a octubre). Tu remuneración computable es S/ 2,400 + S/ 400 = S/ 2,800, y tu CTS de noviembre es S/ 2,800 ÷ 12 × 6 = <strong>S/ 1,400</strong>.</p>
+
+<h2>Preguntas frecuentes</h2>
+{% for p in faq %}
+<h3>{{ p.q }}</h3>
+<p>{{ p.a }}</p>
+{% endfor %}
+
+<p class="base-legal">Base legal: TUO del Decreto Legislativo N.º 650, Ley de CTS (D.S. N.º 001-97-TR), y su reglamento (D.S. N.º 004-97-TR). Remuneración mínima vital: S/ {{ site.rmv }}, vigente desde el {{ site.rmv_vigencia }}.</p>
+{% endblock %}
